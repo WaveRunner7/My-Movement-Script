@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://df3ke14loxfcm"]
+
+[ext_resource type="PackedScene" uid="uid://j4x0ceuppvde" path="res://src/scenes/character.tscn" id="1_qf6vi"]
+[ext_resource type="Script" path="res://src/scripts/world.gd" id="1_rkvu7"]
+[ext_resource type="PackedScene" uid="uid://dtc3xfvkjetwl" path="res://src/scenes/world_enviroment.tscn" id="2_uvlpq"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_iscva"]
+viewport_path = NodePath("2D View")
+
+[sub_resource type="BoxMesh" id="BoxMesh_0v2aw"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_hwemg"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gdwm8"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_sp34t"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_rkvu7")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.192396, 0.818251, 0.541709, -0.246046, -0.574613, 0.780565, 0.949971, 0.0168924, 0.311881, 0, 0, 0)
+light_color = Color(0.294118, 0.294118, 0.294118, 1)
+light_energy = 10.0
+shadow_enabled = true
+
+[node name="Character" parent="." instance=ExtResource("1_qf6vi")]
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(0.965926, -0.0449435, 0.254887, 0, 0.984808, 0.173648, -0.258819, -0.167731, 0.951251, 1.5, 4, 6)
+projection = 1
+current = true
+size = 8.0
+
+[node name="2D Map" type="Sprite2D" parent="."]
+position = Vector2(1067, 83)
+texture = SubResource("ViewportTexture_iscva")
+
+[node name="2D View" type="SubViewport" parent="."]
+size = Vector2i(128, 128)
+
+[node name="Camera" type="Camera3D" parent="2D View"]
+transform = Transform3D(1, 0, 0, 0, 0.999391, 0.0348995, 0, -0.0348995, 0.999391, 0, 4, 6)
+projection = 1
+current = true
+size = 15.0
+
+[node name="World" parent="." instance=ExtResource("2_uvlpq")]
+
+[node name="2nd Platform" type="MeshInstance3D" parent="."]
+transform = Transform3D(12.096, 0, 0, 0, 2, 0, 0, 0, 20, 41, -1, 0)
+mesh = SubResource("BoxMesh_0v2aw")
+skeleton = NodePath("../Ground")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="2nd Platform"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="2nd Platform/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_hwemg")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(60, 0, 0, 0, 2, 0, 0, 0, 20, 0, -1, 0)
+layers = 3
+mesh = SubResource("BoxMesh_gdwm8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_sp34t")
